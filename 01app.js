@@ -30,11 +30,11 @@ app.use(session(
 // 添加全局的中间件，每次请求都会经过这个中间件
 app.use(function (req, res, next) {
     /* 在三种情况是不用重定向到登录的 1.已经通过了登录，并且没过期 2.跳转登录页面  3.前台的3个页面（非后台的页面） */
-    if (req.session.isLogin && req.session.isLogin == 'true' || req.url == '/admin/login.html' || req.url.indexOf('/admin') == -1) {
+    if (req.session.isLogin && req.session.isLogin == 'true' || req.url == '/admin/login' || req.url.indexOf('/admin') == -1) {
         next()
     } else {
         // redirect:实现重定向
-       res.redirect('/admin/login.html')
+       res.redirect('/admin/login')
     } 
 })
 // 让app使用Router进行路由管理
@@ -43,4 +43,3 @@ app.use(router);
 
 
 
-// 哈哈哈哈哈哈哈

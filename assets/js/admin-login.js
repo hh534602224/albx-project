@@ -16,7 +16,7 @@ $('#login').on('click',()=>{
             $('.errmasg span').text(hh.msg)
             $('.errmasg').fadeIn(500).delay(1000).fadeOut(500);
             }else{
-                location.href='/admin/index.html'
+                location.href='/admin/index'
             }    
         }
     })
