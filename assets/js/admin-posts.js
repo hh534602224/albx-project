@@ -49,13 +49,11 @@
       onPageClicked: function (event,originalEvent,type,page) {
           // 把当前点击的页码赋值给currentPage, 调用ajax,渲染页面
           pageNum = page
-int()
-$('.cateSelector').val(),
-$('.statuSelector').val()
+      int()
+
 }
   })
   }
-
    // 实现筛选功能
     // 加载分类数据
  $.ajax({
@@ -73,16 +71,16 @@ $('.statuSelector').val()
   }
 })
 
-   $('.btn-search').on('click',function(){
+
+   $('#haha').on('click',function(){
     // 收集数据
-    
-    var obj = {
+console.log('111');
+   var obj = {
         cate:$('.cateSelector').val(),
         status:$('.statuSelector').val()
     }
     // 发起ajax请求
     int(obj)
-
 })
 
 

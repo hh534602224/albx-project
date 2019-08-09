@@ -6,6 +6,7 @@ const postscontrollers={
 function getposts(req,res){
     // 把页面选择的数据传回去
    let obj=req.query
+//    console.log(result);
 model.getposts(obj,(err,result)=>{
 if (err) {
     // 有错就报错
@@ -15,10 +16,12 @@ if (err) {
     // console.log(result);
     res.send(result)
 }
-
 })
-
 }
+
+
+
+
 
 // 获取数据库里有的状态
 function getAllCate(req,res){

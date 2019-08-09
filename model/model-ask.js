@@ -24,7 +24,9 @@ function getposts(obj, callback) {
   let sql = `SELECT posts.*,users.nickname,categories.\`name\` FROM posts,users,categories 
   WHERE posts.user_id=users.id and posts.category_id=categories.id `
   // 当传过来的数据有分类筛选要求时
+  console.log(obj);
   if (obj.cate && obj.cate != 'all'){
+    // console.log(111);
       sql+=` and category_id = ${obj.cate}`
       // 当传过来的数据有发布状态筛选要求时
   }if(obj.status && obj.status != 'all'){
@@ -35,13 +37,28 @@ function getposts(obj, callback) {
 // 发送给数据库
   conmo.query(sql, (err, result) => {
     if (err){
+      // console.log(err)
       callback(err)
     }else{
-     let sql1=`SELECT COUNT(*) as hh FROM posts JOIN users ON posts.user_id=users.id JOIN categories ON posts.category_id=categories.id`
-      conmo.query(sql1,(err1,result1)=>{
+     let sql2=`SELECT COUNT(*) as hh FROM posts JOIN users ON posts.user_id=users.id 
+     JOIN categories ON posts.category_id=categories.id where 1=1 `
+     if (obj.cate && obj.cate != 'all'){
+      sql2+=` and category_id = ${obj.cate}`
+      // 当传过来的数据有发布状态筛选要求时
+      // console.log('111');
+      
+    }
+  if(obj.status && obj.status != 'all'){
+    sql2+=` and posts.status ='${obj.status}'`
+    // console.log('222');
+  }
+  
+  
+      conmo.query(sql2,(err1,result1)=>{
         if(err1){
           callback(err1)
         }else{
+          // console.log(sql2);
           // console.log(result1[0].hh);
           callback(null,{data:result,total:result1[0].hh})
         }
