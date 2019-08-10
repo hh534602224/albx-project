@@ -1,7 +1,7 @@
 ;(function(){
   // 先给个初始值
  let  pageNum = 1;
- let pageSize=2;
+ let pageSize=6;
   function int(cha){
     $.ajax({
     type:'get',
@@ -11,8 +11,6 @@
       ...cha,
     },
     success:function(hh){
-      console.log(hh);
-      console.log(hh.total);
         let html=''
     hh.data.forEach(e => {
         html+=`<tr>
@@ -23,7 +21,7 @@
         <td class="text-center">${e.created}</td>
         <td class="text-center">${e.status=='published'?'已发布':'草稿'}</td>
         <td class="text-center">
-          <a href="javascript:;" class="btn btn-default btn-xs">编辑</a>
+          <a href="/admin/post-add?id=${e.id}" class="btn btn-default btn-xs">编辑</a>
           <a href="javascript:;" class="btn btn-danger btn-xs">删除</a>
         </td>
       </tr>`
@@ -74,7 +72,6 @@
 
    $('#haha').on('click',function(){
     // 收集数据
-console.log('111');
    var obj = {
         cate:$('.cateSelector').val(),
         status:$('.statuSelector').val()

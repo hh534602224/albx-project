@@ -20,11 +20,4 @@ if (arr=='posts'||arr=='post-add'||arr=='categories'){
     $('#'+arr).css('color','#fff')
 }
 
-
-
-
-
-
-
-
 })()

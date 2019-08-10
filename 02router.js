@@ -5,6 +5,7 @@ const pagescontrollers=require('./controllers/pagescontrollers')
 const logincontrollers=require('./controllers/logincontrollers')
 const postscontrollers=require('./controllers/postscontrollers')
 const addcontrollers=require('./controllers/addcontrollers')
+const editpostcontrollers=require('./controllers/editpostcontrollers')
 // 设置页面请求
 // 后台页面
 router.get('/admin/index',pagescontrollers.getAdminIndexPage)
@@ -26,7 +27,7 @@ router.get('/admin/index',pagescontrollers.getAdminIndexPage)
       // ajax请求
       // 登陆的验证
       .post('/isuserpassword',logincontrollers.login)
-      // 所有文章的你内容渲染
+      // 所有文章的内容渲染
       .get('/getposts',postscontrollers.getposts)
       // 获取数据库里有的状态
       .get('/getAllCate',postscontrollers.getAllCate)
@@ -34,7 +35,10 @@ router.get('/admin/index',pagescontrollers.getAdminIndexPage)
       .post ('/upfile',addcontrollers.upfile)
       //保存新的文章
       .post('/addpost',addcontrollers.addpost)
-      
+      // 根据id获取文章的内容
+      .get ('/getpostbyid',editpostcontrollers.getpostbyid)
+      // 修改文章内容
+      .post ('/updatepost',editpostcontrollers.updatepost)
 
 // 暴露
 module.exports=router;

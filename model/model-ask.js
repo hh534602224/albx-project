@@ -102,11 +102,37 @@ function addpost(data,callback){
 
 }
 
+ // 根据id获取文章的内容
+ function getpostbyid(id,callback){
+   let sql=`SELECT posts.* FROM posts WHERE posts.id=`+id.id
+  conmo.query(sql,(err,result)=>{
+    if(err){
+      callback(err)
+    }else{
+      callback(null,result)
+    }
+    
+
+  })
+
+ }
+//  更新文章的数据
+function updatepost (obj,callback){
+  let sql=`update posts set ? where id=?`
+  conmo.query(sql,[obj,obj.id],(err,result)=>{
+    if(err){
+      callback(err)
+    }else{
+      callback(null)
+    }
+  })
+
+}
 
 
 // 暴露
 const model = {
-  sqlselectuser, getposts,getAllCate,addpost
+  sqlselectuser, getposts,getAllCate,addpost,getpostbyid,updatepost
 }
 module.exports = model;
 
