@@ -18,7 +18,7 @@ askmodel.sqlselectuser(data,(result,err)=>{
             // console.log(req.session);
             req.session.isLogin = 'true'
             // 将当前用户账号密码存储到Session
-            // req.session.currentUser = result
+            req.session.currentUser = result
             // console.log(req.session);
             // 设置完后要发送
             res.send({code:200,msg:'登录成功'})  

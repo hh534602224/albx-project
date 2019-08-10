@@ -4,6 +4,7 @@ const router=express.Router();
 const pagescontrollers=require('./controllers/pagescontrollers')
 const logincontrollers=require('./controllers/logincontrollers')
 const postscontrollers=require('./controllers/postscontrollers')
+const addcontrollers=require('./controllers/addcontrollers')
 // 设置页面请求
 // 后台页面
 router.get('/admin/index',pagescontrollers.getAdminIndexPage)
@@ -29,6 +30,10 @@ router.get('/admin/index',pagescontrollers.getAdminIndexPage)
       .get('/getposts',postscontrollers.getposts)
       // 获取数据库里有的状态
       .get('/getAllCate',postscontrollers.getAllCate)
+      // 添加文章的图片上传
+      .post ('/upfile',addcontrollers.upfile)
+      //保存新的文章
+      .post('/addpost',addcontrollers.addpost)
       
 
 // 暴露

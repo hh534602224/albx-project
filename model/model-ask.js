@@ -9,6 +9,7 @@ let conmo = mysql.createConnection({
   // 将日期格式进行转换
   dateStrings: true
 })
+
 // 从数据库根据用户名查询
 function sqlselectuser(data, callback) {
   let sql = `SELECT * FROM users WHERE email='${data.email}'`
@@ -24,7 +25,7 @@ function getposts(obj, callback) {
   let sql = `SELECT posts.*,users.nickname,categories.\`name\` FROM posts,users,categories 
   WHERE posts.user_id=users.id and posts.category_id=categories.id `
   // 当传过来的数据有分类筛选要求时
-  console.log(obj);
+  // console.log(obj);
   if (obj.cate && obj.cate != 'all'){
     // console.log(111);
       sql+=` and category_id = ${obj.cate}`
@@ -58,8 +59,7 @@ function getposts(obj, callback) {
         if(err1){
           callback(err1)
         }else{
-          // console.log(sql2);
-          // console.log(result1[0].hh);
+    
           callback(null,{data:result,total:result1[0].hh})
         }
 
@@ -69,7 +69,7 @@ function getposts(obj, callback) {
   })
 
 }
-
+// 获取文章类名
 function getAllCate(callback){
   let sql=`SELECT categories.id,categories.\`name\` FROM categories`
   conmo.query(sql,(err,result)=>{
@@ -82,8 +82,31 @@ function getAllCate(callback){
   })
 
 }
+
+// 添加 文章的内容
+function addpost(data,callback){
+  let sql=`insert into posts set ?`
+  conmo.query(sql,data,(err,result)=>{
+    if(err){
+      callback({
+        code:404,
+        msg:'服务器异常',
+        err
+    })}else{
+      callback({
+        code:200,
+        msg:'新增成功',
+    })
+    }
+  })
+
+}
+
+
+
+// 暴露
 const model = {
-  sqlselectuser, getposts,getAllCate
+  sqlselectuser, getposts,getAllCate,addpost
 }
 module.exports = model;
 
