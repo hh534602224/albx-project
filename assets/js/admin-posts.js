@@ -1,7 +1,8 @@
 ;(function(){
   // 先给个初始值
  let  pageNum = 1;
- let pageSize=6;
+ let pageSize=4;
+//  加载所有数据库文章
   function int(cha){
     $.ajax({
     type:'get',
@@ -22,7 +23,7 @@
         <td class="text-center">${e.status=='published'?'已发布':'草稿'}</td>
         <td class="text-center">
           <a href="/admin/post-add?id=${e.id}" class="btn btn-default btn-xs">编辑</a>
-          <a href="javascript:;" class="btn btn-danger btn-xs">删除</a>
+          <span data_id="${e.id}" class="btn btn-danger btn-xs">删除</span>
         </td>
       </tr>`
     });
@@ -33,8 +34,7 @@
   }
   // 调用渲染
   int();
- 
-
+// 设置翻页的相关属性
   function setpagenation(hh){
     $(".pagination").bootstrapPaginator({
       //设置版本号
@@ -69,7 +69,7 @@
   }
 })
 
-
+// 筛选的点击事件
    $('#haha').on('click',function(){
     // 收集数据
    var obj = {
@@ -80,5 +80,31 @@
     int(obj)
 })
 
+// 删除文章的点击事件
+$('tbody').on('click','span',function(){
+      let id =$(this).attr('data_id')
+      if(confirm('你是否要真的删除这骗文章')){
+        $.ajax({
+          type:'get',
+          url:`/delpost?id=${id}`,
+          success:function(hh){
+            // console.log(hh);
+            if(hh.code==200){
+              if($('tbody>tr').length==1){
+                pageNum--
+              }
+              alert(hh.msg)
+              int()
+            }else{
+              console.log(hh.err);
+            }
+          }
+        })
+      }
+      
+      
+})
+
+console.log();
 
 })()

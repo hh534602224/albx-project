@@ -128,11 +128,22 @@ function updatepost (obj,callback){
   })
 
 }
+// 删除数据库的文章
+function delpost(id,callback){
+let sql=`DELETE FROM posts WHERE id=${id.id};`;
+conmo.query(sql,(err)=>{
+  if(err){
+    callback(err)
+  }else{
+    callback(null)
+  }
+})
+}
 
 
 // 暴露
 const model = {
-  sqlselectuser, getposts,getAllCate,addpost,getpostbyid,updatepost
+  sqlselectuser, getposts,getAllCate,addpost,getpostbyid,updatepost,delpost
 }
 module.exports = model;
 

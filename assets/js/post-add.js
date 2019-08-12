@@ -1,5 +1,4 @@
 ; (function () {
-
   // 分类状态选项动态生成
   $.ajax({
     type: 'get',
@@ -68,7 +67,7 @@
         processData: false, // 让ajax不要进行数据的处理，因为Formdata已经处理好了
         dataType: 'json',
         success: function (hh) {
-          console.log(hh);
+
           if (hh.code == 200) {
             $('#hideimg').val('/uploads/' + hh.imgname)
             $('.thumbnail').attr('src', '/uploads/' + hh.imgname).show()
@@ -117,7 +116,8 @@
         type: 'post',
         url: '/addpost',
         data,
-        success: function () {
+        success: function (hh) {
+          console.log(hh);
           location.href = '/admin/posts'
 
         }

@@ -31,6 +31,9 @@ router.get('/admin/index',pagescontrollers.getAdminIndexPage)
       .get('/getposts',postscontrollers.getposts)
       // 获取数据库里有的状态
       .get('/getAllCate',postscontrollers.getAllCate)
+      //删除文章
+      .get('/delpost',postscontrollers.delpost)
+
       // 添加文章的图片上传
       .post ('/upfile',addcontrollers.upfile)
       //保存新的文章
@@ -39,6 +42,6 @@ router.get('/admin/index',pagescontrollers.getAdminIndexPage)
       .get ('/getpostbyid',editpostcontrollers.getpostbyid)
       // 修改文章内容
       .post ('/updatepost',editpostcontrollers.updatepost)
-
+      
 // 暴露
 module.exports=router;

@@ -46,13 +46,13 @@ function upfile(req,res){
 function addpost(req,res){
 let data=req.body;
 data.user_id=req.session.currentUser[0].id;
+data.id=null;
 data.views='0';
 data.likes='0';
 // console.log(data);
 
 model.addpost(data,(result)=>{
         res.send(result)
-
 })
 }
 

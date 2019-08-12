@@ -1,6 +1,6 @@
 const model=require('../model/model-ask')
 const postscontrollers={
-    getposts,getAllCate
+    getposts,getAllCate,delpost
 }
 // 获取文章的内容
 function getposts(req,res){
@@ -19,10 +19,6 @@ if (err) {
 })
 }
 
-
-
-
-
 // 获取数据库里有的状态
 function getAllCate(req,res){
     model.getAllCate((err,result)=>{
@@ -32,6 +28,26 @@ function getAllCate(req,res){
             res.send(result)
         }
     })
+}
+// 删除数据库的文章
+function delpost(req,res){
+    let id=req.query
+    
+    model.delpost(id,(err)=>{
+        if(err){
+            res.send({
+                code:404,
+                err
+            })
+        }else{
+            res.send({
+                code:200,
+                msg:'删除成功'
+            })
+        }
+
+    })
+
 }
 
 module.exports=postscontrollers;
